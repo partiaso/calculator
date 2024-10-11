@@ -1,36 +1,108 @@
+const numbers = document.querySelectorAll(".number");
+const operators = document.querySelectorAll(".operator");
 
-function add(a, b) {
-    return a + b
+const addBtn = document.querySelector(".add");
+const subtractBtn = document.querySelector(".subtract");
+const multiplyBtn = document.querySelector(".multiply");
+const divideBtn = document.querySelector(".divide");
+
+const equalBtn = document.querySelector(".equal");
+const clearBtn = document.querySelector(".clear");
+const dotBtn = document.querySelector(".dot");
+const percentBtn = document.querySelector(".percent");
+
+
+const calculatorScreen = document.querySelector(".result");
+
+function add() {
+    return parseInt(currentNumber) + parseInt(prevNumber)
 }
-console.log(add(20,10));
 
-function subtract(a, b) {
-    return a - b
+function subtract() {
+    return parseInt(prevNumber) - parseInt(currentNumber)
 }
-console.log(subtract(20,10));
 
-function multiply(a, b) {
-    return a * b
+function multiply() {
+    return parseInt(currentNumber) * parseInt(prevNumber)
 }
-console.log(multiply(20,10));
 
-function divide(a, b) {
-    return a / b
+function divide() {
+    return parseInt(prevNumber) / parseInt(currentNumber)
 }
-console.log(divide(20,10));
 
 
-
-
-let firstNumber = Number;
+let calculationOperator = "";
+let currentNumber = "0";
 let operator;
-let secondNumber = Number;
+let prevNumber = "";
 
-function operate(oper, num1, num2) {
-    if (oper == add) return add(num1, num2);
-    else if (oper == subtract) return subtract(num1, num2);
-    else if (oper == multiply) return multiply(num1, num2);
-    else if (oper == divide)return divide(num1, num2);
+
+function updateDisplay(number) {
+    calculatorScreen.textContent = number
 }
-console.log(operate(divide, 5, 2))
 
+
+function inputNumber(number){
+    if (currentNumber === "0"){
+        currentNumber = number
+    } else 
+    currentNumber += number;
+}
+
+function inputOperator(operator) {
+    if (calculationOperator === ""){
+        prevNumber = currentNumber;
+    } 
+    calculationOperator = operator;
+    currentNumber = "0";
+}
+
+function calculate() {
+    if (calculationOperator == "+" ) {
+        result = add(currentNumber, prevNumber)
+    }
+    else if (calculationOperator =="-") {
+        result = subtract(currentNumber, prevNumber)
+    }
+    else if (calculationOperator == "*" ) {
+        result = multiply(currentNumber, prevNumber)
+    }
+    else if (calculationOperator == "/" ) {
+        result = divide(currentNumber, prevNumber)
+    }
+    currentNumber = result;
+    calculationOperator = "";
+}
+
+numbers.forEach((number) => {
+    number.addEventListener("click", () => {
+        updateDisplay(currentNumber);
+    })
+})
+
+operators.forEach((operator) => {
+    operator.addEventListener("click", (event) => {
+        inputOperator(event.target.dataset.value);
+    })
+})
+
+numbers.forEach((number) => {
+    number.addEventListener("click", (event) => {
+        inputNumber(event.target.dataset.value);
+        updateDisplay(currentNumber)
+    })
+})
+
+
+equalBtn.addEventListener("click", () => {
+    calculate();
+    updateDisplay(currentNumber);
+})
+
+
+clearBtn.addEventListener("click", () => {
+    currentNumber = "0";
+    prevNumber = "";
+    calculationOperator = "";
+    updateDisplay(currentNumber)
+})

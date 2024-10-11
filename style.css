@@ -71,7 +71,7 @@ p, h1, h2, h3, h4, h5, h6 {
     color: white;
 }
 
-.kbKeyContainer {
+.number, .operator, .dot, .equal, .clear, .plusminus, .percent {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,8 +84,32 @@ p, h1, h2, h3, h4, h5, h6 {
     user-select: none;
     cursor: pointer;
 }
-.kbKeyContainer:hover {
+.number:hover,
+.operator:hover,
+.dot:hover,
+.equal:hover,
+.clear:hover,
+.plusminus:hover,
+.percent:hover {
     filter: brightness(1.15);
+}
+
+.number, .dot{
+    background-color: #AC9EFF;
+}
+
+.operator, .equal {
+    background-color: #FF6661;
+}
+
+.clear, .plusminus, .percent {
+    background-color: #8169FF ;
+}
+.operator:hover, .equal:hover {
+    filter: brightness(1.4)
+}
+.clear:hover, .plusminus:hover, .percent:hover {
+    filter: brightness(1.2)
 }
 
 #zero {
@@ -95,28 +119,9 @@ p, h1, h2, h3, h4, h5, h6 {
 .display p {
     font-size: 4rem;
     color: white;
-
-}
-
-
-#zero, #one, #two, #three, #four, #five, #six, #seven, #eight, #nine, #dot {
-    background-color: #AC9EFF;
 }
 
 
 
-#equal, #add, #subtract, #multiply, #divide {
-    background-color: #FF6661;
-}
-#equal:hover, #add:hover, #subtract:hover, #multiply:hover, #divide:hover {
-    filter: brightness(1.4);
-}
 
 
-
-#clear, #idk, #percent {
-    background-color: #8169FF ;
-}
-#clear:hover, #idk:hover, #percent:hover{
-    filter: brightness(1.2)
-}
