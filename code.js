@@ -53,10 +53,16 @@ function inputOperator(operator) {
     if (calculationOperator === ""){
         prevNumber = currentNumber;
     } 
+    else if (calculationOperator === "+" || "-" || "*" || "/") {
+        calculate();
+        updateDisplay(currentNumber);
+        prevNumber = currentNumber;
+    }
     calculationOperator = operator;
     currentNumber = "0";
-}
+} 
 
+let result = currentNumber;
 function calculate() {
     if (calculationOperator == "+" ) {
         result = add(currentNumber, prevNumber)
@@ -68,9 +74,12 @@ function calculate() {
         result = multiply(currentNumber, prevNumber)
     }
     else if (calculationOperator == "/" ) {
-        result = divide(currentNumber, prevNumber)
+        if (currentNumber == "0"){
+            alert("Error: cannot be divided by 0");
+            updateDisplay(currentNumber)
+        } else result = divide(currentNumber, prevNumber)
     }
-    currentNumber = result;
+    currentNumber = Math.round(result * 100 ) / 100;
     calculationOperator = "";
 }
 
@@ -102,6 +111,7 @@ equalBtn.addEventListener("click", () => {
 
 clearBtn.addEventListener("click", () => {
     currentNumber = "0";
+    result = currentNumber;
     prevNumber = "";
     calculationOperator = "";
     updateDisplay(currentNumber)
